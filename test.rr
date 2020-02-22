@@ -1,0 +1,42 @@
+create a function called foo. foo has 2 arguments (var1, var2){
+
+    let result = var1 + var2
+
+    return result
+}
+
+if var1 equals var2, do the following{
+
+    let result = var1 + var2
+    
+}
+
+while var1 equals var2, do the following{
+
+    printToTerminal()
+
+}
+
+create a function called foobar. foobar has 2 arguments (var1, var2){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create a function called foobars. foobar has 2 arguments (var1, var2){
+
+}
