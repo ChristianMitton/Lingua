@@ -4,6 +4,8 @@ from get_closing_bracket import getClosingBracket
 def getFunctionBounds(filePath, functionName):
     f = open(filePath, "r")
     contents = f.readlines()
+    contents = [x.strip() for x in contents]
+
 
     # file_lines = convertFileToArray(filePath)
 
@@ -29,5 +31,5 @@ def getFunctionBounds(filePath, functionName):
                 functionEnd = getClosingBracket(filePath, functionStart)                
                                 
                 return (functionStart, functionEnd)
-
+    f.close()
 # def handleFunctionCall(arrayOfArguments, functionBounds):

@@ -33,19 +33,32 @@ def handleVariableArithmetic(var1, operator, var2):
 
 # TODO: start at main in user file
 def main():    
-    filename = 'test_files/test.lg' # filename = sys.argv[1]  
+    filePath = 'sample_lingua_code/sample.lg' # filePath = sys.argv[1]  
 
     #! contains a {'function' : {'variable': 'value'}} mapping
     function_variable_hashtable = {}
 
-    handleDeclareVariables('test_files/test.lg', 3, function_variable_hashtable)
-    handleDeclareVariables('test_files/test.lg', 5, function_variable_hashtable)
-    handleDeclareVariables('test_files/test.lg', 7, function_variable_hashtable)
-    handleDeclareVariables('test_files/test.lg', 9, function_variable_hashtable)
+    testFunc = 'foo'
 
+    functionStart, functionEnd = getFunctionBounds(filePath, testFunc)      
+
+    #? function_variable_hashtable will be replaced by each functions hashtable
+    handleDeclareVariables(filePath, 3, function_variable_hashtable)
+    handleDeclareVariables(filePath, 5, function_variable_hashtable)
+    handleDeclareVariables(filePath, 7, function_variable_hashtable)
+    handleDeclareVariables(filePath, 9, function_variable_hashtable)    
+
+    returnValue = getValueToReturn(filePath, 11, function_variable_hashtable)
+
+    print(f'{testFunc} start: line {functionStart}\n{testFunc} end: line {functionEnd}')  
+
+    print(f'returnvalue: {returnValue}')  
+
+    print('---[function_variable_hashtable]---')
     printHashtable(function_variable_hashtable)
+    print('----------------END----------------')
             
-    # functionBounds = getFunctionBounds(filename, 'foobar')
+    # functionBounds = getFunctionBounds(filePath, 'foobar')
 
     # functionStart, functionEnd = functionBounds
 

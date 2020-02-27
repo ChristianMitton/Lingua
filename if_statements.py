@@ -55,5 +55,5 @@ def handleIfStatement(filePath, boundsAndArgs):
         line_count+=1
         if(line_count == end):
             break
-        
+    f.close()
         # print(line_count)
