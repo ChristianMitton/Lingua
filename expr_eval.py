@@ -49,7 +49,7 @@ def expression_eval(expr):
     i = 0
     while i < len(expr):                
         char = expr[i]
-        print(f'i: {i} Current char: {char}')
+        # print(f'i: {i} Current char: {char}')
         if(char == ' '):
             continue
         if(not isOperator(char)):
@@ -73,14 +73,15 @@ def expression_eval(expr):
             
             result = performOp(num1, operator, num2)
 
-            print(f'num1: {num1} op: {operator} num2: {num2} result: {result}')            
+            # print(f'num1: {num1} op: {operator} num2: {num2} result: {result}')            
             stack.append(str(result))
-            print(f"Stack: {stack}")
+            # print(f"Stack: {stack}")
                 
         i += 1
                              
-    print(stack)
+    # print(stack)
+    return stack.pop()
 
 # while True:
 expr = '1 + 2 + 3 * 9'
-expression_eval(expr)
+# expression_eval(expr)
