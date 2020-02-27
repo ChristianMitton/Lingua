@@ -1,8 +1,11 @@
 import expr_eval
 import helper_functions
+import functions
 
 from expr_eval import expression_eval
 from helper_functions import printHashtable
+# from functions import getFunctionNames
+# from functions import executeFunction
 
 # get lineNumber in file as string
 def getLineAsSting(filePath, var_line_number):
@@ -42,7 +45,9 @@ def handleDeclareVariables(filePath, var_decleration_line_number, variable_hasht
     line = line.replace(".","")
     splitLine = line.split()
 
-    # print(f'Split line: {splitLine}')
+    functionNames = functions.getFunctionNames(filePath)
+
+    # print(f'line: {line}')
 
     # operation needs to be performed
     if(len(splitLine) > 4):        
@@ -57,6 +62,12 @@ def handleDeclareVariables(filePath, var_decleration_line_number, variable_hasht
 
         new_variable = splitLine[1]
         new_value = result
+    elif(splitLine[3] in functionNames):  
+        functionName = splitLine[3]
+        new_variable = splitLine[1]
+
+        functionStart, functionEnd = functions.getFunctionBounds(filePath, functionName)
+        new_variable = functions.executeFunction(filePath, functionStart, functionEnd)
     else:
         new_variable = splitLine[1]
         new_value = splitLine[3]

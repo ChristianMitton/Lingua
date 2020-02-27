@@ -27,7 +27,18 @@ create a function called foobar. foobar has 2 arguments (var1, var2){
 
 }
 
+Start the program at this function. It will be called main.{
+    
+    let a = 1.
 
+    let b = 2.  
+
+    let c = 7.  
+    
+    let result = a + b + c.
+
+    return result.
+}
 
 
 

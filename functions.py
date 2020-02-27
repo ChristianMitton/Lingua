@@ -1,5 +1,60 @@
+import sys
+import expr_eval
+# import functions
+import if_statements
+import while_loops
 import get_closing_bracket
-from get_closing_bracket import getClosingBracket
+import print_statements
+import variables
+import helper_functions
+import return_statements
+# import functions
+
+from expr_eval import expression_eval
+# from functions import getFunctionBounds
+from if_statements import getIfStatementBounds
+from if_statements import handleIfStatement  
+# from variables import handleDeclareVariables
+from helper_functions import printHashtable
+from return_statements import getValueToReturn  
+from get_closing_bracket import getClosingBracket   
+# from functions import executeFunction
+# from functions import getFunctionNames
+
+def lineIsAFunction(lineStringArray):    
+    if(lineStringArray[0] == 'create'):
+        return True
+    return False
+    
+def lineIsAnIfStatement(lineStringArray):
+    if(lineStringArray[0] == 'if'):
+        return True
+    return False
+
+def lineIsAWhileLoop(lineStringArray):
+    if(lineStringArray[0] == 'while'):
+        return True
+    return False
+
+def lineIsAPrintStatement(lineStringArray):
+    if(lineStringArray[0] == 'print'):
+        return True
+    return False
+
+def lineIsAVariableDecleration(lineStringArray):
+    if(lineStringArray[0] == 'let'):
+        return True
+    return False
+
+def lineIsAReturnStatement(lineStringArray):
+    if(lineStringArray[0] == 'return'):
+        return True
+    return False
+
+def lineIsMainFunction(lineStringArray):
+    if(lineStringArray[0] == 'Start'): #'Start the program at this function. It will be called <function name>{ ... }
+        return True
+    return False
 
 def getFunctionBounds(filePath, functionName):
     f = open(filePath, "r")
@@ -33,3 +88,62 @@ def getFunctionBounds(filePath, functionName):
                 return (functionStart, functionEnd)
     f.close()
 # def handleFunctionCall(arrayOfArguments, functionBounds):
+
+def getFunctionNames(filePath):
+    f = open(filePath, "r")
+    contents = f.readlines()
+    contents = [x.strip() for x in contents]
+
+    result = []
+
+    line_number = 0
+    for line in contents: 
+        line_number += 1
+
+        if(len(line) < 1):
+            continue
+
+        line = line.replace('.','')
+
+        splitLine = line.split()
+
+        if(splitLine[0] == 'create'):
+            functionName = splitLine[4]
+            result.append(functionName)
+    return result
+
+def executeFunction(filePath, startLine, endLine):
+    f = open(filePath, 'r')
+    contents = f.readlines()
+    contents = [x.strip() for x in contents]
+
+    hashTable = {}
+
+    #! will only encounter lines within function
+    line_count = startLine
+    for line in contents[startLine:endLine-1]:
+        line_count += 1
+
+        if(len(line) < 1):
+            continue
+
+        splitLine = line.split()
+
+        # print(f'[functions] splitLine = {splitLine}')
+        # print(f'[functions] line_count = {line_count}')
+
+        if(lineIsAVariableDecleration(splitLine)):
+            hashTable = variables.handleDeclareVariables(filePath, line_count, hashTable)
+
+        if(lineIsAReturnStatement(splitLine)):
+            returnValue = getValueToReturn(filePath, line_count, hashTable)
+            # print(f'return value: {returnValue}')
+            f.close()
+            return returnValue
+
+        # print(line)
+
+    f.close()
+
+    print(f'Hashtable after finishing execute function {hashTable}')
+    
