@@ -29,13 +29,13 @@ On your terminal, run **"python3 interpreter.py <your_lingua_file.lg>"** to comp
     
     OR
     
-    let var1 = 1.
+    let var1 equal 1.
 
-    let var2 = 2.  
+    let var2 equal 2.  
 
-    let var3 = 7.  
+    let var3 equal 7.  
     
-    let result = var1 + var2 + var3.
+    let result equal var1 + var2 + var3.
 ```
 
 **Function decleration**
