@@ -97,26 +97,29 @@ return 5.
 **Example Runnable file that prints 10 to the terminal:**
 ```
 create a function called foo. foo has 0 arguments (){
-    let x = 1.
 
-    let y = 2. 
+    let x equal 1.
+
+    let y equal 2. 
     
-    let result = x + y.
+    let result equal x + y.
     
-    return result
+    return result.
+
 }
 
-Start the program at this function. It will be called main.{
+Start the program at this function. It will be called main. {
     
-    let a = 3.
+    let a equal 3.
 
-    let b = 4.  
+    let b equal 4.  
 
-    let c = foo().  
+    let c equal foo().  
     
-    let result = a + b + c
+    let result equal a + b + c.
 
     print result.
+
 }
 ```
 
