@@ -47,15 +47,10 @@ def getMainFunctionBounds(filePath):
     f.close()
 
 
-
-
-# TODO: start at main in user file
 def main():    
-    filePath = 'sample_lingua_code/sample.lg' # filePath = sys.argv[1]    
+    filePath = sys.argv[1]   
 
     mainStartLine, mainEndLine = getMainFunctionBounds(filePath)
-
-    # f = open(filePath, 'r')
 
     executeFunction(filePath, mainStartLine, mainEndLine)    
     
