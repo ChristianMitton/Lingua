@@ -1,43 +1,27 @@
-create a function called foo. foo has 2 arguments (var1, var2){
+create a function called foo. foo has 0 arguments (){
 
-    let a = 1.
+    let x equal 1.
 
-    let b = 2.  
-
-    let c = 5.  
-
-    let result = a + b + c.
-
+    let y equal 2. 
+    
+    let result equal x + y.
+    
     return result.
+
 }
 
-if var1 equals var2, do the following{
-
-    let x = 1.
+Start the program at this function. It will be called main. {
     
-}
+    let a equal 3.
 
-while var1 equals var2, do the following{
+    let b equal 4.  
 
-    printToTerminal()
-
-}
-
-create a function called foobar. foobar has 2 arguments (var1, var2){
-
-}
-
-Start the program at this function. It will be called main.{
+    let c equal foo().  
     
-    let a = 1.
+    let result equal a + b + c.
 
-    let b = 2.  
+    print result.
 
-    let c = 7.  
-    
-    let result = a + b + c.
-
-    return result.
 }
 
 

@@ -113,11 +113,13 @@ def getFunctionNames(filePath):
     return result
 
 def executeFunction(filePath, startLine, endLine):
+# def executeFunction(filePath, startLine, endLine, arguments_hashtable):
     f = open(filePath, 'r')
     contents = f.readlines()
     contents = [x.strip() for x in contents]
 
     hashTable = {}
+    # arguments_hashTable
 
     #! will only encounter lines within function
     line_count = startLine
@@ -141,9 +143,59 @@ def executeFunction(filePath, startLine, endLine):
             f.close()
             return returnValue
 
+        if(lineIsAnIfStatement(splitLine)):
+            if_statements.handleIfStatement(filePath, line_count, hashTable)
+            # ! skip line to end of if statement
+
+        if(lineIsAPrintStatement(splitLine)):
+            print_statements.handlePrintToTerminal(splitLine[1], hashTable)
+
         # print(line)
 
     f.close()
 
-    print(f'Hashtable after finishing execute function {hashTable}')
+    # print(f'Hashtable after finishing execute function {hashTable}')
+
+def getFunctionArguments(filePath, lineNumberOfFunction):
+    f = open(filePath, 'r')
+    contents = f.readlines()
+    contents = [x.strip() for x in contents]
+
+    line_count = 0
+    for line in contents:
+        line_count += 1
+        if(line_count == lineNumberOfFunction):
+            stringArray = line.split()
+    f.close()
+
+
+    # print(f'String array: {stringArray}')    
+    # return
+
+    numArguments = int(stringArray[7])    
+
+    result = []
+
+    if(numArguments == 0):
+        return result
+    if(numArguments == 1):        
+        var = stringArray[9].replace('(','')
+        var = var.replace(')','')
+        var = var.replace('{','')        
+        result.append(var)    
+        return result
+    if(numArguments > 1):
+        arguments = stringArray[9:]
+
+        for var in arguments:            
+            var = var.replace('(','')
+            var = var.replace(')','')
+            var = var.replace('{','')
+            # print(f'at var {var}')
+            result.append(var)
+    return result
+
+        
     
+# getFunctionArguments('sample_lingua_code/sample.lg', 26)
+# print(1)

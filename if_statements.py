@@ -1,4 +1,5 @@
 import get_closing_bracket
+import variables
 from get_closing_bracket import getClosingBracket
 
 def getIfStatementBounds(filePath, start_line_number):
@@ -32,28 +33,41 @@ def getIfStatementBounds(filePath, start_line_number):
                                 
             return (start_line_number, statement_end_line_number, argument1, argument2)
 
-def handleIfStatement(filePath, boundsAndArgs):
-    f = open(filePath)
+def handleIfStatement(filePath, startLine, variable_hashTable):
+    f = open(filePath, 'r')
     contents = f.readlines()
     contents = [x.strip() for x in contents]
 
-    start, end, arg1, arg2 = boundsAndArgs    
-    print(f'if statement start: {start}\nIf statement end: {end}\nArg1: {arg1}\nArg2: {arg2}')
+    endLine = get_closing_bracket.getClosingBracket(filePath, startLine)
+    
+    # arguments_hashTable
 
-    # start from beginning of the line where function is
-    line_count = start
-    for item in enumerate(contents[start-1:]):
-        line = item[1]
+    #! will only encounter lines within if statement
+    atStartOfStatement = True
+    line_count = startLine
 
-        # print(line)
+    for line in contents[startLine-1:endLine]:
+        line_count += 1  
 
-        # split line
-        splitLine = line.split() 
-        print(splitLine)
+        splitLine = line.split()      
+
+        if(atStartOfStatement):
+            print(f'line: {splitLine}')
+            variable1 = splitLine[1]
+            operator = splitLine[2]
+            variable2 = splitLine[3]
+            variable2 = variable2.replace(',','')
+            print(f'variable1: {variable1}')
+            print(f'operator: {operator}')
+            print(f'variable1: {variable2}')
+            expr = variables.replaceVariables([variable1, operator, variable2], variable_hashTable)
+            print(f'expr: {expr}')
+            atStartOfStatement = False
         
 
-        line_count+=1
-        if(line_count == end):
-            break
-    f.close()
-        # print(line_count)
+        if(len(line) < 1 or line == '}'):
+            continue
+
+        print(line)
+
+        splitLine = line.split()

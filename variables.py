@@ -43,15 +43,17 @@ def replaceVariables(expressionArray, variable_hashtable):
 def handleDeclareVariables(filePath, var_decleration_line_number, variable_hashtable):
     line = getLineAsSting(filePath, var_decleration_line_number)
     line = line.replace(".","")
+    line = line.replace("(","")
+    line = line.replace(")","")
     splitLine = line.split()
 
     functionNames = functions.getFunctionNames(filePath)
 
     # print(f'line: {line}')
 
-    # operation needs to be performed
+    #? variable is set to an expression
     if(len(splitLine) > 4):        
-        #TODO: replacing any variables in expression with their values
+        # replacing any variables in expression with their values
         splitLine = replaceVariables(splitLine, variable_hashtable)      
         # concat expression array into string  
         expression = "".join(splitLine[3:])          
@@ -62,13 +64,24 @@ def handleDeclareVariables(filePath, var_decleration_line_number, variable_hasht
 
         new_variable = splitLine[1]
         new_value = result
+    #? variable is set to function
     elif(splitLine[3] in functionNames):  
-        functionName = splitLine[3]
+        functionName = splitLine[3]    
         new_variable = splitLine[1]
 
+        # print(f'line: {line}')
+        # print(f'functionName: {functionName}')
+        # print(f'new_variable: {new_variable}')
+
+        # TODO: handle args        
+
+        # get start and end lines of function
         functionStart, functionEnd = functions.getFunctionBounds(filePath, functionName)
-        new_variable = functions.executeFunction(filePath, functionStart, functionEnd)
+        #! before calling the function, insert the arguments into it's dictionary
+        new_value = functions.executeFunction(filePath, functionStart, functionEnd)
+
     else:
+    #? variable is a simple value
         new_variable = splitLine[1]
         new_value = splitLine[3]
 
