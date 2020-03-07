@@ -93,6 +93,18 @@ Note: When creating the header for the main function, words can be changed, howe
 return 5.
 ```
 
+**If Statements**
+```
+  if x equals y {
+    print x.
+  }
+  
+  OR
+  
+  if x == x {
+    print x.
+  }
+```
 
 **Example Runnable file that prints 10 to the terminal:**
 ```
